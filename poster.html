@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tuesday 24 November 2026 — World News Edition</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1024px;
+    height: 1024px;
+    overflow: hidden;
+    background: #f5efe3;
+    color: #151922;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  }
+  .page {
+    width: 1024px;
+    height: 1024px;
+    padding: 14px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(180deg, #f8f3e8 0%, #f1e9d8 100%);
+  }
+
+  /* Masthead */
+  .masthead {
+    background: #131824;
+    color: #fbf7ef;
+    border-radius: 10px;
+    padding: 12px 18px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #c8963e;
+  }
+  .mast-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e6b863;
+    text-transform: uppercase;
+  }
+  .date-title {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+    line-height: 1.02;
+    color: #ffffff;
+  }
+  .mast-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+  }
+  .edition-pill {
+    background: #b91c1c;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .sub-meta {
+    font-size: 12px;
+    font-weight: 600;
+    color: #cfd6e3;
+  }
+
+  /* World Map Strip */
+  .map-strip {
+    background: #e7decb;
+    border: 1.5px solid #c5b89e;
+    border-radius: 9px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .map-svg {
+    width: 270px;
+    height: 84px;
+    flex-shrink: 0;
+    background: #1b283b;
+    border-radius: 6px;
+    border: 1px solid #354762;
+  }
+  .lead-banner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .lead-tag {
+    display: inline-block;
+    align-self: flex-start;
+    background: #131824;
+    color: #f3c46b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .lead-head {
+    font-size: 16.5px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #131824;
+  }
+  .lead-summary {
+    font-size: 11.8px;
+    line-height: 1.3;
+    color: #2f3644;
+    font-weight: 500;
+  }
+
+  /* 8 Story Grid: 2 columns x 4 rows */
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .card {
+    background: #fffdf8;
+    border: 1.5px solid #cbbda2;
+    border-radius: 9px;
+    padding: 9px 11px;
+    display: flex;
+    gap: 11px;
+    align-items: stretch;
+    box-shadow: 0 2px 0 rgba(21, 25, 34, 0.06);
+  }
+  .art-box {
+    width: 114px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+  }
+  .tag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .loc {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b6457;
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-size: 15.5px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #131824;
+    letter-spacing: -0.2px;
+  }
+  .card-text {
+    font-size: 11.4px;
+    line-height: 1.32;
+    color: #303746;
+    font-weight: 500;
+  }
+
+  /* Bottom Wire Ticker */
+  .ticker {
+    background: #131824;
+    color: #f6efe3;
+    border-radius: 8px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ticker-label {
+    background: #c8963e;
+    color: #131824;
+    font-size: 10.5px;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    letter-spacing: 0.6px;
+  }
+  .ticker-items {
+    font-size: 11.3px;
+    font-weight: 600;
+    color: #e6dfd1;
+    line-height: 1.28;
+  }
+
+  .c-crimson { background: #b91c1c; }
+  .c-blue { background: #1d4ed8; }
+  .c-slate { background: #334155; }
+  .c-green { background: #047857; }
+  .c-amber { background: #b45309; }
+  .c-teal { background: #0f766e; }
+  .c-indigo { background: #4338ca; }
+  .c-rose { background: #9f1239; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <div class="mast-left">
+        <div class="kicker">The World in One Day · Global Illustrated Dispatch</div>
+        <h1 class="date-title">TUESDAY · 24 NOVEMBER 2026</h1>
+      </div>
+      <div class="mast-right">
+        <span class="edition-pill">WORLD NEWS SUMMARY</span>
+        <span class="sub-meta">6 Continents · Politics · Markets · War · Tech · Space · Climate</span>
+      </div>
+    </header>
+
+    <!-- WORLD MAP + LEAD SUMMARY -->
+    <section class="map-strip">
+      <svg class="map-svg" viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="88" fill="#162233"/>
+        <!-- Simplified stylized continents -->
+        <path d="M22,18 L66,14 L74,28 L58,40 L48,46 L68,54 L62,78 L46,72 L42,50 L28,42 Z" fill="#324966"/>
+        <path d="M116,18 L154,14 L158,32 L134,36 L118,32 Z" fill="#324966"/>
+        <path d="M118,38 L148,38 L156,54 L142,76 L126,72 L116,52 Z" fill="#324966"/>
+        <path d="M158,18 L236,16 L248,38 L222,52 L192,48 L166,44 Z" fill="#324966"/>
+        <path d="M214,56 L246,58 L250,74 L222,76 Z" fill="#324966"/>
+        <!-- Grid lines -->
+        <line x1="0" y1="44" x2="280" y2="44" stroke="#263852" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <line x1="140" y1="0" x2="140" y2="88" stroke="#263852" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <!-- Story Pins -->
+        <circle cx="58" cy="28" r="4" fill="#60a5fa"/><!-- Brooklyn / Wall St -->
+        <circle cx="80" cy="48" r="3.5" fill="#a78bfa"/><!-- Kourou -->
+        <circle cx="122" cy="24" r="3.5" fill="#fb7185"/><!-- England -->
+        <circle cx="144" cy="26" r="4" fill="#ef4444"/><!-- Ukraine -->
+        <circle cx="152" cy="39" r="3.5" fill="#f59e0b"/><!-- Gaza / Baghdad -->
+        <circle cx="122" cy="48" r="3.5" fill="#34d399"/><!-- Senegal -->
+        <circle cx="218" cy="32" r="4" fill="#fbbf24"/><!-- Shanghai / Korea -->
+        <circle cx="244" cy="64" r="3.5" fill="#2dd4bf"/><!-- Solomons / Australia -->
+      </svg>
+      <div class="lead-banner">
+        <span class="lead-tag">24 NOV 2026 OVERVIEW</span>
+        <div class="lead-head">High-Stakes Rulings, Energy Strikes, $41B Pharma M&amp;A &amp; Orbital Launches</div>
+        <div class="lead-summary">
+          Beijing probes Shanghai chief Chen Jining; a Brooklyn jury convicts Huawei on 10 trade-secret counts; overnight Russian drone strikes kill 9 and halt a Ukrainian thermal plant; the Dow tops 50,000 alongside Sanofi's $41bn Insmed deal; and Ariane 6 launches 36 satellites.
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 ILLUSTRATED NEWS PANELS -->
+    <main class="grid">
+      <!-- 1. CHINA POLITICS -->
+      <article class="card">
+        <div class="art-box" style="background:#2d1518;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#2a1316"/>
+            <rect x="0" y="84" width="114" height="30" fill="#461b20"/>
+            <!-- Shanghai Oriental Pearl silhouette -->
+            <line x1="28" y1="20" x2="28" y2="84" stroke="#d97706" stroke-width="2.5"/>
+            <circle cx="28" cy="42" r="6" fill="#f59e0b"/>
+            <circle cx="28" cy="64" r="8" fill="#d97706"/>
+            <!-- Hall columns & Seal -->
+            <rect x="48" y="38" width="54" height="46" fill="#7f1d1d" rx="3"/>
+            <polygon points="44,38 75,20 106,38" fill="#b91c1c"/>
+            <rect x="55" y="45" width="6" height="34" fill="#fca5a5"/>
+            <rect x="72" y="45" width="6" height="34" fill="#fca5a5"/>
+            <rect x="89" y="45" width="6" height="34" fill="#fca5a5"/>
+            <circle cx="75" cy="64" r="15" fill="#fbbf24" opacity="0.92"/>
+            <text x="75" y="68" text-anchor="middle" font-size="11" font-weight="900" fill="#7f1d1d">CCDI</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-crimson">Asia · Politics</span>
+            <span class="loc">Shanghai, China</span>
+          </div>
+          <h2 class="card-title">China Probes Politburo Member Chen Jining</h2>
+          <p class="card-text">Anti-corruption watchdog CCDI investigates Shanghai party chief Chen Jining, 62, for "serious violations" — the 4th Politburo member ousted in two years.</p>
+        </div>
+      </article>
+
+      <!-- 2. HUAWEI VERDICT -->
+      <article class="card">
+        <div class="art-box" style="background:#13203b;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#111d36"/>
+            <!-- Courthouse & Circuit Chip -->
+            <polygon points="18,42 57,18 96,42" fill="#3b82f6"/>
+            <rect x="22" y="42" width="70" height="44" fill="#1e3a8a"/>
+            <rect x="28" y="46" width="8" height="36" fill="#93c5fd"/>
+            <rect x="53" y="46" width="8" height="36" fill="#93c5fd"/>
+            <rect x="78" y="46" width="8" height="36" fill="#93c5fd"/>
+            <rect x="16" y="86" width="82" height="10" fill="#60a5fa" rx="2"/>
+            <rect x="38" y="54" width="38" height="22" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+            <text x="57" y="69" text-anchor="middle" font-size="11" font-weight="900" fill="#fbbf24">10 / 12</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-blue">Americas · Courts</span>
+            <span class="loc">Brooklyn, NY</span>
+          </div>
+          <h2 class="card-title">US Jury Finds Huawei Guilty in Trade-Secrets Trial</h2>
+          <p class="card-text">Federal jury convicts Huawei on 10 of 12 counts for stealing rival router code &amp; Quintel tech, while acquitting on racketeering; Huawei plans to appeal.</p>
+        </div>
+      </article>
+
+      <!-- 3. UKRAINE STRIKES -->
+      <article class="card">
+        <div class="art-box" style="background:#1f242d;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#1c212b"/>
+            <!-- Power plant & cooling towers -->
+            <path d="M16,96 L22,52 L40,52 L46,96 Z" fill="#475569"/>
+            <path d="M52,96 L58,56 L74,56 L80,96 Z" fill="#334155"/>
+            <rect x="12" y="92" width="90" height="10" fill="#1e293b"/>
+            <!-- Explosion & lightning -->
+            <circle cx="64" cy="48" r="14" fill="#ef4444" opacity="0.85"/>
+            <circle cx="64" cy="48" r="7" fill="#fde047"/>
+            <!-- Air defense arc -->
+            <path d="M22,26 Q58,14 94,32" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <polygon points="88,22 98,28 90,34" fill="#93c5fd"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-slate">Europe · War &amp; Energy</span>
+            <span class="loc">Zaporizhzhia, Ukraine</span>
+          </div>
+          <h2 class="card-title">Russian Drone Strikes Kill 9, Halt Thermal Plant</h2>
+          <p class="card-text">112 Russian drones (88 downed) hit a Zaporizhzhia apartment block and DTEK power plant, killing 9 and injuring 59+. UK MI5 warns firms of European sabotage.</p>
+        </div>
+      </article>
+
+      <!-- 4. MARKETS & PHARMA -->
+      <article class="card">
+        <div class="art-box" style="background:#0f2922;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#0d261f"/>
+            <!-- Chart grid & Dow arrow -->
+            <line x1="14" y1="84" x2="100" y2="84" stroke="#34d399" stroke-width="1.5"/>
+            <polyline points="16,74 36,64 52,70 72,44 96,26" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="96,26 84,26 94,38" fill="#10b981"/>
+            <!-- Pharma Pill badge -->
+            <rect x="18" y="20" width="44" height="20" rx="10" fill="#fbbf24"/>
+            <text x="40" y="34" text-anchor="middle" font-size="11" font-weight="900" fill="#131824">$41B</text>
+            <text x="58" y="102" text-anchor="middle" font-size="11" font-weight="800" fill="#a7f3d0">DOW 50,019</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-green">Global · Markets</span>
+            <span class="loc">NY &amp; Paris</span>
+          </div>
+          <h2 class="card-title">Dow Tops 50,019 · Sanofi Buys Insmed for $41B</h2>
+          <p class="card-text">Dow rises 0.86% to 50,019.77 as US confidence hits 103.3, while tech/Bitcoin (&lt;$60k) dip after Nvidia's CEO swing. Sanofi pays $175/share for biotech Insmed.</p>
+        </div>
+      </article>
+
+      <!-- 5. MIDDLE EAST -->
+      <article class="card">
+        <div class="art-box" style="background:#2d1f11;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#291b0f"/>
+            <!-- Oil Derrick -->
+            <polygon points="28,88 38,34 48,88" fill="none" stroke="#f59e0b" stroke-width="2.8"/>
+            <line x1="30" y1="68" x2="46" y2="68" stroke="#f59e0b" stroke-width="2"/>
+            <line x1="34" y1="52" x2="42" y2="52" stroke="#f59e0b" stroke-width="2"/>
+            <!-- Gaza Crosshair -->
+            <circle cx="80" cy="48" r="18" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+            <line x1="56" y1="48" x2="104" y2="48" stroke="#ef4444" stroke-width="1.8"/>
+            <line x1="80" y1="24" x2="80" y2="72" stroke="#ef4444" stroke-width="1.8"/>
+            <rect x="12" y="88" width="90" height="10" fill="#78350f"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-amber">Middle East · Security</span>
+            <span class="loc">Gaza &amp; Baghdad</span>
+          </div>
+          <h2 class="card-title">Gaza Strike Kills Security Chief · Iraq Oil Order</h2>
+          <p class="card-text">Israeli strike in Gaza City kills Hamas security chief Naim Abu Nahal. Baghdad orders federal takeover of Kurdish oil fields &amp; borders; Erbil rejects.</p>
+        </div>
+      </article>
+
+      <!-- 6. ASIA PACIFIC DEFENCE -->
+      <article class="card">
+        <div class="art-box" style="background:#0f272b;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#0d2428"/>
+            <!-- Radar arcs & fighter jets -->
+            <circle cx="57" cy="64" r="36" fill="none" stroke="#2dd4bf" stroke-width="1.2" opacity="0.5"/>
+            <circle cx="57" cy="64" r="22" fill="none" stroke="#2dd4bf" stroke-width="1.2" opacity="0.7"/>
+            <polygon points="34,42 54,36 44,50" fill="#f8fafc"/>
+            <polygon points="62,28 84,22 72,38" fill="#fbbf24"/>
+            <!-- Island silhouette -->
+            <path d="M22,88 Q57,72 92,88 Z" fill="#14b8a6"/>
+            <rect x="18" y="88" width="78" height="8" fill="#0f766e" rx="2"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-teal">Asia-Pacific · Defence</span>
+            <span class="loc">Korea &amp; Solomons</span>
+          </div>
+          <h2 class="card-title">Korea Scrambles Jets · Solomons Drops China Pact</h2>
+          <p class="card-text">Russian jets near Ulleungdo trigger air-raid shelter alert &amp; ROK scrambles. Solomon Islands declines to renew 2022 China security deal, signs Australia pact.</p>
+        </div>
+      </article>
+
+      <!-- 7. SPACE -->
+      <article class="card">
+        <div class="art-box" style="background:#171738;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#131330"/>
+            <!-- Stars & Orbit -->
+            <circle cx="20" cy="22" r="1.5" fill="#fff"/>
+            <circle cx="92" cy="18" r="1.5" fill="#fff"/>
+            <circle cx="84" cy="48" r="1.5" fill="#a5b4fc"/>
+            <ellipse cx="57" cy="86" rx="46" ry="18" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="4,3"/>
+            <!-- Ariane 6 Rocket -->
+            <polygon points="57,16 65,36 65,70 49,70 49,36" fill="#f8fafc"/>
+            <rect x="43" y="44" width="6" height="26" fill="#cbd5e1"/>
+            <rect x="65" y="44" width="6" height="26" fill="#cbd5e1"/>
+            <!-- Exhaust flame -->
+            <polygon points="48,70 66,70 57,96" fill="#f97316"/>
+            <polygon points="52,70 62,70 57,86" fill="#fde047"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-indigo">Science · Space</span>
+            <span class="loc">Kourou &amp; China</span>
+          </div>
+          <h2 class="card-title">Ariane 6 Lifts 36 Satellites · Shenzhou-24 Crew</h2>
+          <p class="card-text">Ariane 64 (Flight VA271) deploys 36 Amazon Leo satellites from French Guiana. China names Pakistani astronaut Zeeshan Ali to its Shenzhou-24 Tiangong crew.</p>
+        </div>
+      </article>
+
+      <!-- 8. CLIMATE & AFRICA SPORT -->
+      <article class="card">
+        <div class="art-box" style="background:#2e1420;">
+          <svg viewBox="0 0 114 114" width="114" height="114">
+            <rect width="114" height="114" fill="#2b121d"/>
+            <!-- Thermometer -->
+            <rect x="26" y="20" width="12" height="54" rx="6" fill="#fce7f3"/>
+            <circle cx="32" cy="78" r="12" fill="#e11d48"/>
+            <rect x="29" y="28" width="6" height="48" fill="#e11d48"/>
+            <!-- AFCON Trophy -->
+            <path d="M58,28 L98,28 L91,54 Q78,65 65,54 Z" fill="#fbbf24"/>
+            <rect x="74" y="58" width="8" height="18" fill="#d97706"/>
+            <rect x="64" y="76" width="28" height="8" rx="2" fill="#f59e0b"/>
+            <text x="78" y="45" text-anchor="middle" font-size="7.8" font-weight="900" fill="#78350f">AFCON</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="tag-row">
+            <span class="badge c-rose">Climate &amp; Sport</span>
+            <span class="loc">England &amp; Africa</span>
+          </div>
+          <h2 class="card-title">5,258 England Heat Deaths · Senegal Regains AFCON</h2>
+          <p class="card-text">UKHSA reports record 5,258 summer 2026 heat deaths in England. Sports court CAS restores Senegal's 1–0 AFCON title; DR Congo rebels halt Bunia advance.</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- BOTTOM TICKER -->
+    <footer class="ticker">
+      <span class="ticker-label">ALSO 24 NOV</span>
+      <div class="ticker-items">
+        UK sanctions 4 Houthi leaders · Saudi approves 2027 budget (3.6% GDP deficit) · Ras Al Khaimah bus crash kills 13 · Slovakia scraps foreign postal voting · Bangladesh's Hasina plans Dec 16 return · Real Madrid 5–1 PSV
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
